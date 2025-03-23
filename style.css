@@ -1,0 +1,55 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-coche {
+    padding: 1rem;
+}
+
+.card-body {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.card-ul-details {
+    display: flex;
+    gap: 1rem;
+    padding: 1px;
+    flex-wrap: wrap;
+}
+
+.link-detalleCoche {
+    text-decoration: none;
+    color: #323232;
+}
+
+.detalle-compra {
+    display: flex;
+    align-items: baseline;
+    padding: 10px;
+}
+.detail-cards-container {
+    width: 100%;
+}
+
+
+.card-body-detail{
+    display: flex;
+    flex-direction: column;
+}
