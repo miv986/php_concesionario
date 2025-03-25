@@ -48,14 +48,14 @@ $listaCoches = $concesionario->obtenerCoches();
                 if (isset($imagenes[0])) {
                     $imagen_url = $imagenes[0];
                 } else {
-                    $imagen_url = '/images/car.php';
+                    $imagen_url = '/images/car.jpg';
                 }
 
             ?>
                 <div class="col-12 col-md-6 col-lg-3 card-coche">
                     <div class="card">
-                        <a class="link-detalleCoche" href="detalleCoche.php?id=<? $coche->id ?>">
-                            <img src="images/car.jpg " class="card-img-top" alt="card-img-top">
+                        <a class="link-detalleCoche" href="detalleCoche.php?id=<?= $coche->id ?>">
+                            <img src="<?= $imagen_url ?> " class="card-img-top" alt="card-img-top">
                             <div class="card-body">
                                 <div class="card-title-model">
                                     <h5 class="card-title"> <?= $coche->marca ?></h5>
@@ -73,7 +73,10 @@ $listaCoches = $concesionario->obtenerCoches();
                         </a>
                     </div>
                 </div>
-            <?php endforeach; ?>
+            <?php endforeach;
+
+            unset($coche);
+            ?>
 
         </div>
     </div>

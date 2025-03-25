@@ -1,3 +1,14 @@
+<?php
+
+require_once 'Concesionario.php';
+
+$concesionario = new Concesionario();
+
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+    $coche = $concesionario->obtenerCochePorId($_GET['id']);
+}
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -14,7 +25,7 @@
     <h1 class="title">Detalle Coche</h1>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="nav-link" href="#">Logo</a>
+            <a class="nav-link" href="#"><img src="" alt="logo"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -32,20 +43,23 @@
         <div class="col-10 card-cocheDetalle">
             <div id="carouselWithIndicators" class="carousel slide" data-bs-ride="carousel">
                 <ol class="carousel-indicators">
-                    <li data-bs-target="#carouselWithIndicators" data-bs-slide-to="0" class="active"></li>
-                    <li data-bs-target="#carouselWithIndicators" data-bs-slide-to="1"></li>
-                    <li data-bs-target="#carouselWithIndicators" data-bs-slide-to="2"></li>
+                    <?php
+                    $listaImagenes = json_decode($coche->imagenes, true);
+
+                    foreach ($listaImagenes as $index => $imagen) : ?>
+                        <li data-bs-target="#carouselWithIndicators" data-bs-slide-to="<?= $index ?>" class="active"></li>
+                    <?php endforeach; ?>
                 </ol>
+                <?php
+
+                ?>
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="images/car.jpg" class="d-block w-100" alt="Slide 1">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="images/car.jpg" class="d-block w-100" alt="Slide 2">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="images/car.jpg" class="d-block w-100" alt="Slide 3">
-                    </div>
+                    <?php foreach ($listaImagenes as $index => $imagen) : ?>
+                        <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
+                            <img src="<?= trim($imagen) ?>" class="d-block w-100" alt="Slide 1">
+                        </div>
+
+                    <?php endforeach; ?>
                 </div>
                 <a class="carousel-control-prev" href="#carouselWithIndicators" role="button" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -59,6 +73,13 @@
         </div>
     </div>
 
+
+    <div class="modelo-marca container">
+        <p class="text-xxl-start font-size-20px"><?=$coche->marca?></p><!-- New -->
+        <p class="text-lg-start font-size-15px"><?=$coche->modelo?></p>
+    </div>
+
+
     <div class="detalle-compra container">
         <div class="row detail-cards-container">
             <div class="col-3">
@@ -66,7 +87,8 @@
                 <div class="card">
                     <div class="card-body-detail">
                         <h5 class="card-title">Año</h5>
-                        <p class="card-text">2021</p>
+                        <p class="card-text"> <?= $coche->anyo ?></p>
+
                     </div>
                 </div>
 
@@ -74,7 +96,7 @@
                 <div class="card">
                     <div class="card-body-detail">
                         <h5 class="card-title">Motor</h5>
-                        <p class="card-text">2.0L</p>
+                        <p class="card-text"><?= $coche->motor ?></p>
                     </div>
                 </div>
 
@@ -82,7 +104,7 @@
                 <div class="card">
                     <div class="card-body-detail">
                         <h5 class="card-title">Puertas</h5>
-                        <p class="card-text">4</p>
+                        <p class="card-text"><?= $coche->puertas ?></p>
                     </div>
                 </div>
             </div>
@@ -92,7 +114,7 @@
                 <div class="card">
                     <div class="card-body-detail">
                         <h5 class="card-title">Color</h5>
-                        <p class="card-text">Rojo</p>
+                        <p class="card-text"><?= $coche->color ?></p>
                     </div>
                 </div>
 
@@ -100,7 +122,7 @@
                 <div class="card">
                     <div class="card-body-detail">
                         <h5 class="card-title">Kilometraje</h5>
-                        <p class="card-text">15,000 km</p>
+                        <p class="card-text"><?= $coche->kilometros ?></p>
                     </div>
                 </div>
 
@@ -108,7 +130,7 @@
                 <div class="card">
                     <div class="card-body-detail">
                         <h5 class="card-title">Precio</h5>
-                        <p class="card-text">25.000 €</p>
+                        <p class="card-text"><?= $coche->precio . " €" ?></p>
                     </div>
                 </div>
             </div>
@@ -118,7 +140,7 @@
                 <div class="card">
                     <div class="card-body-detail">
                         <h5 class="card-title">Combustible</h5>
-                        <p class="card-text">Gasolina</p>
+                        <p class="card-text"><?= $coche->combustible ?></p>
                     </div>
                 </div>
 
@@ -126,7 +148,7 @@
                 <div class="card">
                     <div class="card-body-detail">
                         <h5 class="card-title">Transmisión</h5>
-                        <p class="card-text">Automática</p>
+                        <p class="card-text"><?= $coche->transmision ?></p>
                     </div>
                 </div>
 
@@ -134,7 +156,7 @@
                 <div class="card">
                     <div class="card-body-detail">
                         <h5 class="card-title">Seguridad</h5>
-                        <p class="card-text">6 airbags</p>
+                        <p class="card-text">airbags</p>
                     </div>
                 </div>
             </div>

@@ -17,8 +17,13 @@
     align-items: center;
 }
 
+
 .card-coche {
     padding: 1rem;
+}
+
+.card {
+    height: 100%;
 }
 
 .card-body {
@@ -39,17 +44,39 @@
     color: #323232;
 }
 
+.card-img-top {
+    width: 100%;
+    /* Asegura que ocupe el ancho completo */
+    height: 200px;
+    /* Ajusta la altura deseada */
+    object-fit: cover;
+    /* Recorta la imagen para ajustarla sin deformarla */
+}
+
+.modelo-marca {
+    margin: 2rem;
+}
+
+.text-xxl-start {
+    font-size: 35px;
+}
+
+.text-lg-start {
+    font-size: 25px;
+}
+
 .detalle-compra {
     display: flex;
     align-items: baseline;
     padding: 10px;
 }
+
 .detail-cards-container {
     width: 100%;
 }
 
 
-.card-body-detail{
+.card-body-detail {
     display: flex;
     flex-direction: column;
 }
